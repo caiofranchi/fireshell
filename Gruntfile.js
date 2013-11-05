@@ -253,9 +253,37 @@ module.exports = function (grunt) {
     },
 
     /**
+    * Optimize all images set on the 'src/img' folder
+    * https://github.com/gruntjs/grunt-contrib-imagemin
+    */
+    imagemin: {                          // Task
+      /*static: {                          // Target
+          options: {                       // Target options
+              optimizationLevel: 3
+          },
+          files: {                         // Dictionary of files
+              'dist/img.png': 'src/img.png', // 'destination': 'source'
+              'dist/img.jpg': 'src/img.jpg',
+              'dist/img.gif': 'src/img.gif'
+          }
+      },*/
+      dynamic: {                         // Another target
+          options: {                       // Target options
+              optimizationLevel: 3
+          },
+          files: [{
+              expand: true,                     // Enable dynamic expansion
+              cwd: '<%= project.src %>/img/',   // Src matches are relative to this path
+              src: ['**/*.{png,jpg,gif}'],      // Actual patterns to match
+              dest: '<%= project.assets %>/img/'                  // Destination path prefix
+          }]
+      }
+    },
+
+    /**
      * Runs tasks against changed watched files
      * https://github.com/gruntjs/grunt-contrib-watch
-     * Watching development files and run concat/compile tasks
+     * Watching development files and run concat/compile/optimize-img tasks
      * Livereload the browser once complete
      */
     watch: {
@@ -266,6 +294,10 @@ module.exports = function (grunt) {
       sass: {
         files: '<%= project.src %>/scss/{,*/}*.{scss,sass}',
         tasks: ['sass:dev', 'cssmin:dev', 'autoprefixer:dev']
+      },
+      imagemin:{
+          files: '<%= project.src %>/img/{,*/}*.{jpg,gif,png}',
+          tasks: ['imagemin']
       },
       livereload: {
         options: {
@@ -290,10 +322,12 @@ module.exports = function (grunt) {
     'cssmin:dev',
     'bower:dev',
     'autoprefixer:dev',
-    'jshint',
+    'autoprefixer:dev',
+//    'jshint',
     'concat:dev',
     'connect:livereload',
     'open',
+    'imagemin',
     'watch'
   ]);
 
@@ -308,7 +342,8 @@ module.exports = function (grunt) {
     'autoprefixer:dist',
     'cssmin:dist',
     'clean:dist',
-    'jshint',
+    'imagemin',
+//    'jshint',
     'uglify'
   ]);
 

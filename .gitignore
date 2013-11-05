@@ -29,6 +29,9 @@ src/components
 ## Sass
 .sass-cache
 
+## PHPStorm
+.idea
+
 ## OS X
 .DS_Store
 .AppleDouble

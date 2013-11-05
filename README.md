@@ -1,3 +1,16 @@
+# CAIO FRANCHI VERSION
+
+* Added HTML IE conditionals
+* Added IE8 Media Query Support by css3-mediaqueries.js
+* Removed not needed HTML tags =)
+* Added TweenMax for tween lib and other polyfills
+* Added History.JS plugin
+* Added Mobile and Browser detection
+* Added Facebook OG meta tags
+* Added a grunt scheme to compress png and jpg added to the src folder
+* Added .htaccess from BOILERPLATE
+
+
 # FireShell [![Build Status](https://travis-ci.org/toddmotto/fireshell.png)](https://travis-ci.org/toddmotto/fireshell)
 
 Fiercely quick front-end boilerplate and workflows.
